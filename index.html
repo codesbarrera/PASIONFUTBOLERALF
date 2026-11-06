@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasionFutbolerAlf | Camisetas de Fútbol y Dotaciones en Soacha y Bogotá</title>
+    <meta name="description" content="Venta de camisetas de fútbol, sudaderas y dotaciones deportivas de alta calidad con envíos seguros en Soacha, Bogotá y Cundinamarca. ¡Pide por WhatsApp!">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚽%3C/text%3E%3C/svg%3E">
+
+    <!-- Vista previa al compartir el enlace por WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:title" content="PasionFutbolerAlf | Camisetas de fútbol en Soacha y Bogotá">
+    <meta property="og:description" content="Camisetas, busos y dotaciones deportivas de alta calidad. Pide por WhatsApp con envíos en Soacha, Bogotá y Cundinamarca.">
+    <meta property="og:image" content="https://i.postimg.cc/Cx9Xn01L/Whats-App-Image-2026-10-30-at-10-43-16.jpg">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
+        
+        /* Estilos del Banner con la Imagen de Logo */
+        .hero-section { 
+            background: linear-gradient(135deg, #1e293b, #0f172a); 
+            padding: 30px 0; 
+            text-align: center; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+        }
+        .logo-banner-img {
+            max-width: 100%;
+            width: 850px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        .logo-banner-img:hover {
+            transform: scale(1.01);
+        }
+
+        .card-product {
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        .card-product:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+
+        .product-img { height: 280px; object-fit: cover; cursor: zoom-in; transition: transform 0.5s ease; }
+        .card-product:hover .product-img { transform: scale(1.08); }
+
+        .floating-cart { position: fixed; bottom: 25px; right: 25px; z-index: 1050; }
+        .floating-wa {
+            position: fixed; bottom: 25px; left: 25px; z-index: 1050;
+            width: 58px; height: 58px; border-radius: 50%;
+            background: #25d366; color: #fff; font-size: 1.9rem;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .floating-wa:hover { transform: scale(1.1); color: #fff; }
+
+        .img-overlay-container { position: relative; overflow: hidden; }
+        .img-overlay-container:hover .img-hover-text { opacity: 1; }
+        .img-hover-text {
+            position: absolute; inset: 0;
+            background: rgba(15, 23, 42, 0.35);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; opacity: 0;
+            transition: opacity 0.3s ease; pointer-events: none;
+        }
+
+        .search-box { max-width: 500px; margin: 0 auto; }
+        .filter-btn { border-radius: 50rem; transition: all 0.2s ease; font-weight: 600; font-size: 0.9rem; }
+        .filter-btn .conteo { font-size: 0.75rem; opacity: 0.8; }
+        .controles { max-width: 500px; margin: 0 auto; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Cabecera / Banner con la Imagen de Logo -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <img src="https://i.postimg.cc/d0fFnhh1/Gemini-Generated-Image-jw65q5jw65q5jw65.jpg" alt="Pasion Futbolera - Tienda Virtual" class="logo-banner-img img-fluid" onerror="this.onerror=null;this.src='https://i.postimg.cc/Cx9Xn01L/Whats-App-Image-2026-10-30-at-10-43-16.jpg';">
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <h2 class="text-center fw-bold mb-4">🔥 Catálogo Interactivo</h2>
+
+        <!-- Buscador -->
+        <div class="search-box mb-3">
+            <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                <span class="input-group-text bg-white border-0 ps-4"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                <input type="text" id="input-buscador" class="form-control border-0 py-3 shadow-none" placeholder="Busca por equipo o nombre..." oninput="aplicarFiltrosYBusqueda()">
+            </div>
+        </div>
+
+        <!-- Tipo y orden por precio -->
+        <div class="controles row g-2 mb-4">
+            <div class="col-6">
+                <select id="filtro-tipo" class="form-select rounded-pill shadow-sm" aria-label="Filtrar por tipo" onchange="cambiarTipo(this.value)"></select>
+            </div>
+            <div class="col-6">
+                <select id="orden" class="form-select rounded-pill shadow-sm" aria-label="Ordenar" onchange="aplicarFiltrosYBusqueda()">
+                    <option value="default">Orden predeterminado</option>
+                    <option value="precio-asc">Menor precio</option>
+                    <option value="precio-desc">Mayor precio</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Pestañas de equipos -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="contenedor-filtros"></div>
+
+        <div id="loading" class="text-center py-5">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 text-muted">Cargando catálogo...</p>
+        </div>
+
+        <div class="row" id="contenedor-productos"></div>
+    </div>
+
+    <!-- Envíos y pagos -->
+    <div class="container my-5">
+        <div class="card shadow-sm border-0 p-4 bg-white rounded-4" id="seccion-envios">
+            <h3 class="text-dark mb-3"><i class="fas fa-truck-fast text-success me-2"></i> Envíos y Formas de Pago</h3>
+            <div id="info-envios-pagos" class="text-muted"></div>
+        </div>
+    </div>
+
+    <!-- Políticas -->
+    <div class="container my-5">
+        <div class="card shadow-sm border-0 p-4 bg-white rounded-4">
+            <h3 class="text-dark mb-3">
+                <i class="fas fa-undo-alt text-success me-2"></i> Políticas de Devoluciones y Cambios
+            </h3>
+            <p class="text-muted">En <strong>PasionFutbolerAlf</strong> tienes hasta <strong>5 días hábiles</strong> después de recibir tu pedido para solicitar un cambio de talla o modelo.</p>
+        </div>
+    </div>
+
+    <!-- Tratamiento de datos -->
+    <div class="container my-5">
+        <div class="card shadow-sm border-0 p-4 bg-white rounded-4" id="datos">
+            <h3 class="text-dark mb-3"><i class="fas fa-user-shield text-success me-2"></i> Tratamiento de Datos Personales</h3>
+            <p class="text-muted mb-0">Tus datos se usan únicamente para gestionar, coordinar y entregar tu compra en <strong>PasionFutbolerAlf</strong>.</p>
+        </div>
+    </div>
+
+    <!-- WhatsApp flotante -->
+    <a class="floating-wa" id="btn-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <!-- Carrito Flotante -->
+    <div class="floating-cart">
+        <button class="btn btn-success btn-lg rounded-pill shadow-lg px-4 py-3 fw-bold" onclick="abrirModalCarrito()">
+            <i class="fa-solid fa-cart-shopping me-2"></i> Ver Carrito (<span id="contador-carrito">0</span>)
+        </button>
+    </div>
+
+    <!-- Modal Foto ampliada -->
+    <div class="modal fade" id="modalFoto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 bg-dark">
+                <div class="modal-header border-0">
+                    <h6 class="modal-title text-white" id="foto-titulo"></h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-0 text-center">
+                    <img id="foto-img" src="" alt="" class="img-fluid" style="max-height:80vh; object-fit:contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Carrito -->
+    <div class="modal fade" id="modalCarrito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="fa-solid fa-bag-shopping me-2"></i> Tu Carrito de Compras</h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="cerrarModalCarrito()" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="lista-carrito" class="table-responsive"></div>
+                    <div id="info-pago-carrito" class="small text-muted mt-2"></div>
+                    
+                    <hr class="my-4">
+
+                    <!-- SECCIÓN DE PAGO CON NEQUI NEGOCIOS (LLAVE) -->
+                    <div class="card border-0 shadow-sm p-3 mb-4 rounded-4" style="background-color: #f3e8ff;">
+                        <div class="text-center">
+                            <span class="badge text-white mb-2 px-3 py-1 rounded-pill" style="background-color: #6b21a8;">Bre-B / Nequi Negocios</span>
+                            <h6 class="fw-bold text-dark mb-1">Pago Directo</h6>
+                            <p class="text-muted small mb-2">Titular: <strong>Fredi Barrera</strong></p>
+                            
+                            <div class="bg-white p-3 rounded-3 shadow-sm d-inline-block mb-3 border">
+                                <div class="text-muted small mb-1">Llave Nequi Negocios:</div>
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <span id="texto-llave" class="font-monospace fw-bold text-dark fs-5">0090078389</span>
+                                    <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3" onclick="copiarLlaveNequi()" title="Copiar llave">
+                                        <i class="fa-solid fa-copy me-1"></i> Copiar
+                                    </button>
+                                </div>
+                                <small id="copiado-aviso" class="text-success fw-bold d-none mt-1" style="font-size: 0.75rem;">¡Llave copiada al portapapeles!</small>
+                            </div>
+                            
+                            <div class="alert alert-warning py-2 small mb-0 rounded-3">
+                                <i class="fa-solid fa-triangle-exclamation me-1"></i> Recuerda enviar tu comprobante de pago por WhatsApp junto con tu pedido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="form-pedido" class="row g-3" onsubmit="return false;">
+                        <h6 class="fw-bold text-success mb-3"><i class="fa-solid fa-truck-fast me-2"></i> Datos de Envíos y Contacto</h6>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" id="cliente-nombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">WhatsApp de Contacto</label>
+                            <input type="tel" class="form-control" id="cliente-whatsapp" placeholder="Ej. 3028345744" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Correo Electrónico (para confirmación)</label>
+                            <input type="email" class="form-control" id="cliente-correo" placeholder="Ej. correo@ejemplo.com" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label small fw-bold">Dirección de Entrega</label>
+                            <input type="text" class="form-control" id="cliente-direccion" placeholder="Ej. Calle 10 # 20-30" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Ciudad / Localidad</label>
+                            <input type="text" class="form-control" id="cliente-ciudad" value="Soacha / Bogotá" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-light px-4 py-3">
+                    <button type="button" class="btn btn-outline-secondary px-4 rounded-pill" onclick="cerrarModalCarrito()">Seguir Comprando</button>
+                    <button type="button" class="btn btn-success px-4 rounded-pill fw-bold" id="btn-enviar" onclick="enviarPedidoWhatsApp()">
+                        <i class="fa-brands fa-whatsapp me-2"></i> Enviar Pedido por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <div id="redes" class="mb-2"></div>
+            <p class="mb-0">&copy; 2026 PasionFutbolerAlf - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxXn7g7D-zzzpmgQ0BD0g7FxkZ-XS8w0yNoXB58EV1InaPLBbGg0MP_JqAKsacT7Iyv/exec";
+        const NUMERO_VENDEDOR = "573028345744";
+        const IMG_FALLBACK = "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80";
+
+        const ENVIO = { valor: 0, texto: "Se confirma por WhatsApp según tu ubicación" };
+        const MEDIOS_PAGO = ["Nequi Negocios (Llave: 0090078389)"];
+        const HORARIO = "";
+        const INSTAGRAM_URL = "";
+        // Enlace público de la tienda que se comparte. Vacío = usa la dirección actual de la página.
+        const SITIO_URL = "";
+
+        const CLAVE_CARRITO = 'pfa_carrito_v1';
+        const EQUIPOS_CONOCIDOS = [
+            { clave: 'america',    etiqueta: 'América',    emoji: '🔴', color: 'danger'  },
+            { clave: 'nacional',   etiqueta: 'Nacional',   emoji: '🟢', color: 'success' },
+            { clave: 'millonarios',etiqueta: 'Millonarios', emoji: '🔵', color: 'primary' }
+        ];
+
+        let productosGlobal = [];
+        let productosVisibles = [];
+        let carrito = [];
+        let modalInstance = null;
+        let modalFotoInstance = null;
+        let categoriaActual = 'todos';
+        let tipoActual = 'todos';
+        let catalogoReal = false;
+        let enviando = false;
+
+        const norm = s => String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const fmt = n => Number(n || 0).toLocaleString('es-CO');
+        const parsePrecio = v => Number(String(v == null ? '' : v).replace(/[^\d]/g, '')) || 0;
+        const esVerdadero = v => ['si', 'sí', 'true', '1', 'x', 'yes'].includes(norm(v));
+
+        function conLimite(promesa, ms) {
+            let timer;
+            const limite = new Promise((_, rechazar) => { timer = setTimeout(() => rechazar(new Error('Tiempo de espera agotado')), ms); });
+            return Promise.race([promesa, limite]).finally(() => clearTimeout(timer));
+        }
+
+        function detectarEquipo(equipoRaw, nombre) {
+            const textoEquipo = norm(equipoRaw);
+            for (const e of EQUIPOS_CONOCIDOS) {
+                if (textoEquipo && textoEquipo.includes(e.clave)) return e;
+            }
+            if (textoEquipo) {
+                return { clave: textoEquipo, etiqueta: String(equipoRaw).trim(), emoji: '⚽', color: 'secondary' };
+            }
+            const textoNombre = norm(nombre);
+            for (const e of EQUIPOS_CONOCIDOS) {
+                if (textoNombre.includes(e.clave)) return e;
+            }
+            return { clave: 'otros', etiqueta: 'Otros', emoji: '⚽', color: 'secondary' };
+        }
+
+        function convertirImagen(url) {
+            const u = String(url == null ? '' : url).trim();
+            if (!u) return IMG_FALLBACK;
+            const m = u.match(/drive\.google\.com\/file\/d\/([^/?#]+)/) ||
+                      u.match(/drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=([^&#]+)/);
+            return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800` : u;
+        }
+
+        function detectarTipo(tipoRaw, nombre) {
+            const t = norm(tipoRaw);
+            if (t) return t.charAt(0).toUpperCase() + t.slice(1);
+            return /buso|sudadera|chaqueta|hoodie|canguro/.test(norm(nombre)) ? 'Busos' : 'Camisetas';
+        }
+
+        function normalizarProducto(raw) {
+            const p = {};
+            Object.keys(raw || {}).forEach(k => { p[norm(k).replace(/\s+/g, '_')] = raw[k]; });
+            const nombre = String(p.nombre != null ? p.nombre : (p.producto != null ? p.producto : '')).trim();
+            const tallas = String(p.tallas != null ? p.tallas : '').split(',').map(t => t.trim()).filter(Boolean);
+            const equipo = detectarEquipo(p.equipo, nombre);
+            const mayus = s => { s = String(s || '').trim(); return s.charAt(0).toUpperCase() + s.slice(1); };
+            const stockNum = (p.stock == null || String(p.stock).trim() === '') ? null : Number(p.stock);
+            return {
+                id: p.id != null && String(p.id).trim() !== '' ? String(p.id) : (nombre + '|' + equipo.clave),
+                activo: p.estado == null || norm(p.estado) === '' || norm(p.estado) === 'activo',
+                stock: Number.isFinite(stockNum) ? stockNum : null,
+                nombre: mayus(nombre) || 'Camiseta',
+                equipo: equipo,
+                tipo: detectarTipo(p.tipo, nombre),
+                precio: parsePrecio(p.precio),
+                genero: mayus(p.genero || 'Unisex'),
+                calidad: String(p.calidad || 'PRO').trim(),
+                tallas: tallas.length ? tallas : ['S', 'M', 'L', 'XL'],
+                imagen: convertirImagen(p.imagen),
+                masVendido: esVerdadero(p.mas_vendido != null ? p.mas_vendido : (p.masvendido != null ? p.masvendido : (p.mas_vendidos != null ? p.mas_vendidos : (p.destacado != null ? p.destacado : p.vendido))))
+            };
+        }
+
+        let errorCatalogo = '';
+        async function cargarCatalogo() {
+            try {
+                const response = await conLimite(fetch(SHEET_API_URL), 15000);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const data = await conLimite(response.json(), 15000);
+                const esLista = Array.isArray(data);
+                const esEnvuelta = !!(data && Array.isArray(data.data));
+                if (!esLista && !esEnvuelta) throw new Error('Respuesta inesperada');
+                productosGlobal = (esLista ? data : data.data).map(normalizarProducto).filter(p => p.activo);
+                catalogoReal = true;
+                errorCatalogo = '';
+            } catch (error) {
+                console.warn('No se pudo cargar el catálogo del Sheet:', error);
+                errorCatalogo = error.message;
+                catalogoReal = false;
+            }
+        }
+
+        async function reintentarCatalogo() {
+            document.getElementById('contenedor-productos').innerHTML = '';
+            document.getElementById('loading').style.display = 'block';
+            await cargarCatalogo();
+            document.getElementById('loading').style.display = 'none';
+            construirFiltros(); construirTipos(); aplicarFiltrosYBusqueda(); reconciliarCarrito();
+        }
+
+        window.onload = async function () {
+            modalInstance = new bootstrap.Modal(document.getElementById('modalCarrito'));
+            modalFotoInstance = new bootstrap.Modal(document.getElementById('modalFoto'));
+            document.getElementById('btn-wa').href = `https://wa.me/${NUMERO_VENDEDOR}?text=${encodeURIComponent('¡Hola Alf! Tengo una consulta sobre sus camisetas.')}`;
+            pintarInfoEnviosPagos();
+            pintarRedes();
+            cargarCarrito();
+            actualizarCarritoUI();
+
+            await cargarCatalogo();
+
+            document.getElementById('loading').style.display = 'none';
+            construirFiltros();
+            construirTipos();
+            aplicarFiltrosYBusqueda();
+            reconciliarCarrito();
+        };
+
+        function textoMediosPago() {
+            return MEDIOS_PAGO.length ? 'Aceptamos: ' + MEDIOS_PAGO.join(', ') + '.' : 'Los medios de pago se confirman por WhatsApp.';
+        }
+
+        function pintarInfoEnviosPagos() {
+            let html = '<ul class="mb-0">';
+            html += `<li class="mb-2"><strong>Cobertura:</strong> Soacha, Bogotá y Cundinamarca.</li>`;
+            html += `<li class="mb-2"><strong>Costo de envío:</strong> ${ENVIO.valor > 0 ? '$ ' + fmt(ENVIO.valor) + ' COP' : esc(ENVIO.texto)}.</li>`;
+            html += `<li class="mb-2"><strong>Formas de pago:</strong> ${esc(textoMediosPago())}</li>`;
+            html += '</ul>';
+            document.getElementById('info-envios-pagos').innerHTML = html;
+            document.getElementById('info-pago-carrito').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> ${esc(textoMediosPago())}`;
+        }
+
+        function pintarRedes() {
+            if (!INSTAGRAM_URL) return;
+            document.getElementById('redes').innerHTML = `<a class="text-white fs-4 me-3" href="${esc(INSTAGRAM_URL)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>`;
+        }
+
+        function obtenerEquipos() {
+            const mapa = new Map();
+            productosGlobal.forEach(p => {
+                if (!mapa.has(p.equipo.clave)) mapa.set(p.equipo.clave, Object.assign({}, p.equipo, { total: 0 }));
+                mapa.get(p.equipo.clave).total++;
+            });
+            const orden = EQUIPOS_CONOCIDOS.map(e => e.clave);
+            return Array.from(mapa.values()).sort((a, b) => {
+                const ia = orden.indexOf(a.clave), ib = orden.indexOf(b.clave);
+                if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+                return a.etiqueta.localeCompare(b.etiqueta, 'es');
+            });
+        }
+
+        function construirFiltros() {
+            const cont = document.getElementById('contenedor-filtros');
+            const boton = (cat, color, contenido) => {
+                const activo = categoriaActual === cat;
+                return `<button class="btn ${activo ? 'btn-' + color : 'btn-outline-' + color} filter-btn px-4 py-2" data-cat="${esc(cat)}">${contenido}</button>`;
+            };
+            let html = boton('todos', 'dark', `Todos <span class="conteo">(${productosGlobal.length})</span>`);
+            html += boton('mas-vendidos', 'warning', `<i class="fa-solid fa-fire me-1"></i> Más Vendidos`);
+            obtenerEquipos().forEach(e => {
+                html += boton(e.clave, e.color, `${e.emoji} ${esc(e.etiqueta)} <span class="conteo">(${e.total})</span>`);
+            });
+            cont.innerHTML = html;
+            cont.querySelectorAll('.filter-btn').forEach(b => {
+                b.addEventListener('click', () => filtrarPorCategoria(b.dataset.cat));
+            });
+        }
+
+        function filtrarPorCategoria(cat) {
+            categoriaActual = cat;
+            construirFiltros();
+            aplicarFiltrosYBusqueda();
+        }
+
+        function construirTipos() {
+            const conteo = {};
+            productosGlobal.forEach(p => { conteo[p.tipo] = (conteo[p.tipo] || 0) + 1; });
+            const tipos = Object.keys(conteo).sort((a, b) => a.localeCompare(b, 'es'));
+            if (tipoActual !== 'todos' && !conteo[tipoActual]) tipoActual = 'todos';
+            let html = `<option value="todos">Todos los tipos</option>`;
+            tipos.forEach(t => {
+                html += `<option value="${esc(t)}"${t === tipoActual ? ' selected' : ''}>${esc(t)} (${conteo[t]})</option>`;
+            });
+            document.getElementById('filtro-tipo').innerHTML = html;
+        }
+
+        function cambiarTipo(valor) {
+            tipoActual = valor || 'todos';
+            aplicarFiltrosYBusqueda();
+        }
+
+        function aplicarFiltrosYBusqueda() {
+            const texto = norm(document.getElementById('input-buscador').value);
+            const orden = document.getElementById('orden').value;
+
+            let base;
+            if (categoriaActual === 'todos') {
+                base = productosGlobal;
+            } else if (categoriaActual === 'mas-vendidos') {
+                const marcados = productosGlobal.filter(p => p.masVendido);
+                base = marcados.length ? marcados : productosGlobal.slice(0, 6);
+            } else {
+                base = productosGlobal.filter(p => p.equipo.clave === categoriaActual);
+            }
+
+            if (tipoActual !== 'todos') base = base.filter(p => p.tipo === tipoActual);
+
+            let lista = base.filter(p =>
+                !texto || norm(p.nombre).includes(texto) || norm(p.equipo.etiqueta).includes(texto) || norm(p.calidad).includes(texto) || norm(p.tipo).includes(texto)
+            );
+
+            if (orden === 'precio-asc') lista = lista.slice().sort((a, b) => a.precio - b.precio);
+            else if (orden === 'precio-desc') lista = lista.slice().sort((a, b) => b.precio - a.precio);
+
+            productosVisibles = lista;
+            renderizarProductos(productosVisibles);
+        }
+
+        function renderizarProductos(lista) {
+            let html = '';
+            if (!catalogoReal) {
+                html = `<div class="col-12 text-center py-5">
+                    <p class="fs-5 text-dark mb-1">No pudimos conectar con Google Sheets en este momento.</p>
+                    <button class="btn btn-success rounded-pill px-4 fw-bold" onclick="reintentarCatalogo()"><i class="fa-solid fa-rotate me-2"></i> Reintentar</button>
+                </div>`;
+            } else if (!lista || lista.length === 0) {
+                html = '<div class="col-12 text-center py-5"><p class="text-muted fs-5">No se encontraron artículos con esos criterios.</p></div>';
+            } else {
+                lista.forEach((prod, index) => {
+                    const opcionesTallas = prod.tallas.map(t => `<option value="${esc(t)}">Talla ${esc(t)}</option>`).join('');
+                    const agotado = prod.stock !== null && prod.stock <= 0;
+                    const pocas = prod.stock !== null && prod.stock > 0 && prod.stock <= 3;
+                    html += `
+                        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                            <div class="card card-product h-100 rounded-4 overflow-hidden">
+                                <div class="img-overlay-container" onclick="verFoto(${index})" title="Ver foto">
+                                    <img src="${esc(prod.imagen)}" class="card-img-top product-img" alt="${esc(prod.nombre)}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK}'">
+                                    <div class="img-hover-text"><span><i class="fa-solid fa-magnifying-glass-plus me-1"></i> Ver foto</span></div>
+                                </div>
+                                <div class="card-body d-flex flex-column p-4">
+                                    <div class="mb-2">
+                                        <span class="badge bg-success me-1">${esc(prod.equipo.etiqueta.toUpperCase())}</span>
+                                        <span class="badge bg-primary">${esc(prod.genero)}</span>
+                                        <span class="badge bg-dark float-end">${esc(prod.calidad)}</span>
+                                    </div>
+                                    <h5 class="card-title fw-bold text-dark">${esc(prod.nombre)}</h5>
+                                    <p class="text-success fw-bold fs-5 mb-1">$ ${fmt(prod.precio)} COP</p>
+                                    <div class="mb-2" style="min-height:1.2rem">${pocas ? `<small class="text-danger fw-bold">¡Quedan ${prod.stock}!</small>` : ''}</div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold text-secondary">Selecciona Talla:</label>
+                                        <select class="form-select form-select-sm rounded-pill py-2" id="talla-${index}">
+                                            ${opcionesTallas}
+                                        </select>
+                                    </div>
+                                    ${agotado
+                                        ? `<button class="btn btn-secondary mt-auto w-100 fw-bold rounded-pill py-2" disabled>Agotado</button>`
+                                        : `<button class="btn btn-success mt-auto w-100 fw-bold rounded-pill py-2 shadow-sm" onclick="agregarAlCarrito(${index})">
+                                        <i class="fa-solid fa-cart-plus me-2"></i> Agregar al Carrito
+                                    </button>`}
+                                    ${botonesCompartir(prod)}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('contenedor-productos').innerHTML = html;
+        }
+
+        function botonesCompartir(p) {
+            const pagina = SITIO_URL || window.location.href.split('#')[0];
+            const msg = `Mira esta camiseta en PasionFutbolerAlf: ${p.nombre} por $ ${fmt(p.precio)} COP`;
+            const codificar = s => encodeURIComponent(s).replace(/'/g, '%27');
+            const enlaces = {
+                whatsapp: `https://wa.me/?text=${codificar(msg + '\n' + pagina)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${codificar(pagina)}&quote=${codificar(msg)}`,
+                x: `https://twitter.com/intent/tweet?text=${codificar(msg)}&url=${codificar(pagina)}`,
+                telegram: `https://t.me/share/url?url=${codificar(pagina)}&text=${codificar(msg)}`
+            };
+            const copiar = codificar(msg + ' ' + pagina);
+            return `
+                <div class="d-flex gap-2 justify-content-center mt-3 pt-3 border-top">
+                    <a class="btn btn-sm btn-success rounded-circle" style="width:36px;height:36px;line-height:24px" href="${enlaces.whatsapp}" target="_blank" rel="noopener" title="Compartir por WhatsApp" aria-label="Compartir por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a class="btn btn-sm btn-primary rounded-circle" style="width:36px;height:36px;line-height:24px" href="${enlaces.facebook}" target="_blank" rel="noopener" title="Compartir en Facebook" aria-label="Compartir en Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a class="btn btn-sm btn-dark rounded-circle" style="width:36px;height:36px;line-height:24px" href="${enlaces.x}" target="_blank" rel="noopener" title="Compartir en X" aria-label="Compartir en X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a class="btn btn-sm btn-info text-white rounded-circle" style="width:36px;height:36px;line-height:24px" href="${enlaces.telegram}" target="_blank" rel="noopener" title="Compartir en Telegram" aria-label="Compartir en Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" style="width:36px;height:36px" onclick="copiarMensaje('${copiar}')" title="Copiar mensaje" aria-label="Copiar mensaje"><i class="fa-solid fa-link"></i></button>
+                </div>`;
+        }
+
+        async function copiarMensaje(codificado) {
+            const texto = decodeURIComponent(codificado);
+            try {
+                await navigator.clipboard.writeText(texto);
+                alert('Mensaje copiado. Ya puedes pegarlo donde quieras.');
+            } catch (e) {
+                window.prompt('Copia este mensaje:', texto);
+            }
+        }
+
+        function verFoto(index) {
+            const prod = productosVisibles[index];
+            if (!prod) return;
+            const img = document.getElementById('foto-img');
+            img.src = prod.imagen;
+            document.getElementById('foto-titulo').textContent = prod.nombre;
+            modalFotoInstance.show();
+        }
+
+        function guardarCarrito() {
+            try { localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito)); } catch (e) { }
+        }
+
+        function cargarCarrito() {
+            try {
+                const arr = JSON.parse(localStorage.getItem(CLAVE_CARRITO) || '[]');
+                if (Array.isArray(arr)) carrito = arr;
+            } catch (e) { carrito = []; }
+        }
+
+        function reconciliarCarrito() {
+            if (!catalogoReal) return;
+            carrito = carrito.map(i => {
+                const p = productosGlobal.find(x => x.id === i.id);
+                if (!p) return null;
+                i.precio = p.precio; i.nombre = p.nombre; i.equipo = p.equipo.etiqueta;
+                return i;
+            }).filter(Boolean);
+            guardarCarrito();
+            actualizarCarritoUI();
+        }
+
+        function cantidadEnCarrito(id) {
+            return carrito.filter(i => i.id === id).reduce((s, i) => s + i.cantidad, 0);
+        }
+
+        function agregarAlCarrito(index) {
+            const producto = productosVisibles[index];
+            if (!producto) return;
+            const selectTalla = document.getElementById(`talla-${index}`);
+            const tallaSeleccionada = selectTalla ? selectTalla.value : producto.tallas[0];
+
+            const itemExistente = carrito.find(item => item.id === producto.id && item.tallaSeleccionada === tallaSeleccionada);
+            if (itemExistente) {
+                itemExistente.cantidad++;
+            } else {
+                carrito.push({
+                    id: producto.id,
+                    nombre: producto.nombre,
+                    equipo: producto.equipo.etiqueta,
+                    precio: producto.precio,
+                    tallaSeleccionada: tallaSeleccionada,
+                    cantidad: 1
+                });
+            }
+            guardarCarrito();
+            actualizarCarritoUI();
+        }
+
+        function cambiarCantidad(index, delta) {
+            carrito[index].cantidad += delta;
+            if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+            guardarCarrito();
+            actualizarCarritoUI();
+        }
+
+        function totalProductos() {
+            return carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        }
+
+        function actualizarCarritoUI() {
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            document.getElementById('contador-carrito').innerText = totalItems;
+
+            let html = '';
+            if (carrito.length === 0) {
+                html = '<p class="text-center text-muted py-4">Tu carrito está vacío.</p>';
+            } else {
+                html = `<table class="table align-middle">
+                            <thead class="table-light"><tr><th>Producto</th><th>Talla</th><th>Cant</th><th>Subtotal</th><th></th></tr></thead><tbody>`;
+                carrito.forEach((item, index) => {
+                    html += `
+                        <tr>
+                            <td class="fw-bold">${esc(item.nombre)} <br><small class="text-muted font-monospace">${esc(item.equipo)}</small></td>
+                            <td><span class="badge bg-info text-dark">${esc(item.tallaSeleccionada)}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-secondary rounded-circle px-2" onclick="cambiarCantidad(${index}, -1)">−</button>
+                                <span class="mx-2 fw-bold">${item.cantidad}</span>
+                                <button class="btn btn-sm btn-outline-secondary rounded-circle px-2" onclick="cambiarCantidad(${index}, 1)">+</button>
+                            </td>
+                            <td class="fw-bold text-success">$ ${fmt(item.precio * item.cantidad)}</td>
+                            <td><button class="btn btn-sm btn-outline-danger rounded-circle" onclick="eliminarItem(${index})"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    `;
+                });
+                const subtotal = totalProductos();
+                html += `</tbody></table><div class="text-end fw-bold fs-4">Total: <span class="text-success">$ ${fmt(subtotal)} COP</span></div>`;
+            }
+            document.getElementById('lista-carrito').innerHTML = html;
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            guardarCarrito();
+            actualizarCarritoUI();
+        }
+
+        function abrirModalCarrito() { modalInstance.show(); }
+        function cerrarModalCarrito() { modalInstance.hide(); }
+
+        function copiarLlaveNequi() {
+            const llave = "0090078389";
+            navigator.clipboard.writeText(llave).then(() => {
+                const aviso = document.getElementById('copiado-aviso');
+                aviso.classList.remove('d-none');
+                setTimeout(() => aviso.classList.add('d-none'), 3000);
+            });
+        }
+
+        async function registrarPedido(cliente) {
+            const payload = {
+                accion: 'pedido',
+                cliente: cliente,
+                items: carrito.map(i => ({ id: i.id, talla: i.tallaSeleccionada, cantidad: i.cantidad }))
+            };
+            const resp = await conLimite(fetch(SHEET_API_URL, { method: 'POST', body: JSON.stringify(payload) }), 12000);
+            return await conLimite(resp.json(), 12000);
+        }
+
+        async function enviarPedidoWhatsApp() {
+            if (enviando) return;
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+            const nombre = document.getElementById('cliente-nombre').value.trim();
+            const whatsapp = document.getElementById('cliente-whatsapp').value.trim();
+            const correo = document.getElementById('cliente-correo').value.trim();
+            const direccion = document.getElementById('cliente-direccion').value.trim();
+            const ciudad = document.getElementById('cliente-ciudad').value.trim();
+
+            if (!nombre || !whatsapp || !correo || !direccion || !ciudad) {
+                alert("Por favor completa todos los datos de envío y contacto (incluyendo tu correo).");
+                return;
+            }
+
+            enviando = true;
+            const btn = document.getElementById('btn-enviar');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Registrando pedido...';
+
+            const ventana = window.open('', '_blank');
+
+            let registro = null;
+            if (catalogoReal) {
+                try {
+                    registro = await registrarPedido({ nombre, whatsapp, correo, direccion, ciudad });
+                } catch (e) {
+                    console.warn('No se pudo registrar el pedido en el Sheet:', e);
+                }
+            }
+
+            if (registro && registro.ok === false && registro.error === 'stock') {
+                if (ventana) ventana.close();
+                const detalle = Array.isArray(registro.detalle)
+                    ? registro.detalle.map(d => `• ${d.nombre}: ${d.disponible > 0 ? 'quedan ' + d.disponible : 'agotado'}`).join('\n')
+                    : '';
+                alert('Algunos artículos ya no tienen suficiente stock:\n\n' + detalle + '\n\nActualizamos tu carrito.');
+                await cargarCatalogo();
+                construirFiltros(); construirTipos(); aplicarFiltrosYBusqueda(); reconciliarCarrito();
+                enviando = false;
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-brands fa-whatsapp me-2"></i> Enviar Pedido por WhatsApp';
+                return;
+            }
+
+            const registrado = !!(registro && registro.ok);
+            const subtotal = totalProductos();
+
+            let mensaje = `¡Hola Alf! Quiero confirmar el siguiente pedido desde mi web:\n\n`;
+            if (registrado && registro.pedido) mensaje += `🧾 *Pedido N°:* ${registro.pedido}\n`;
+            mensaje += `👤 *Cliente:* ${nombre}\n`;
+            mensaje += `📱 *WhatsApp:* ${whatsapp}\n`;
+            mensaje += `📧 *Correo:* ${correo}\n`;
+            mensaje += `📍 *Dirección:* ${direccion}, ${ciudad}\n\n`;
+            mensaje += `🛒 *Detalle del pedido:*\n`;
+            carrito.forEach(i => {
+                mensaje += `- ${i.cantidad}x ${i.nombre} (${i.equipo}) [Talla: ${i.tallaSeleccionada}] - $${fmt(i.precio * i.cantidad)}\n`;
+            });
+            mensaje += `\n💰 *Total:* $${fmt(subtotal)} COP\n\n_Pago realizado por Nequi Negocios (Llave: 0090078389). Quedo atento._`;
+
+            const urlWp = `https://api.whatsapp.com/send?phone=${NUMERO_VENDEDOR}&text=${encodeURIComponent(mensaje)}`;
+            if (ventana) { ventana.location.href = urlWp; } else { window.location.href = urlWp; }
+
+            carrito = [];
+            guardarCarrito();
+            actualizarCarritoUI();
+            cerrarModalCarrito();
+            enviando = false;
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-brands fa-whatsapp me-2"></i> Enviar Pedido por WhatsApp';
+
+            if (registrado) {
+                await cargarCatalogo();
+                construirFiltros(); construirTipos(); aplicarFiltrosYBusqueda();
+            }
+        }
+    </script>
+</body>
+</html>
