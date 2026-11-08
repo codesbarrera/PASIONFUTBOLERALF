@@ -214,6 +214,29 @@
         .paso-checkout.activo { color:#0f172a; border-bottom:3px solid #159947; padding-bottom:4px; }
         .paso-checkout.hecho { color:#159947; }
     </style>
+    <!-- Ventana que aparece al agregar al carrito -->
+    <div class="modal fade" id="modalAgregado" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg overflow-hidden">
+                <div class="modal-header text-white" style="background:#159947;">
+                    <h5 class="modal-title"><i class="fa-solid fa-circle-check me-2"></i> ¡Agregado al carrito!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="agregado-resumen" class="d-flex align-items-center gap-3 mb-4 p-3 rounded-3" style="background:#f1f5f9;"></div>
+                    <div class="d-flex flex-wrap gap-2 mb-3" id="agregado-tabs"></div>
+                    <div id="agregado-contenido" class="p-3 rounded-3 mb-4" style="background:#f8fafc;min-height:140px;"></div>
+                    <h6 class="fw-bold mb-3">También te puede interesar</h6>
+                    <div class="row g-2" id="agregado-relacionados"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark rounded-pill px-4" data-bs-dismiss="modal">Seguir comprando</button>
+                    <button type="button" class="btn rounded-pill px-4 text-white fw-bold" style="background:#159947;" onclick="verCarritoDesdeAgregado()">Ver carrito y pagar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalCarrito" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content border-0 shadow-lg overflow-hidden">
@@ -778,6 +801,111 @@
             }
             guardarCarrito();
             actualizarCarritoUI();
+            mostrarModalAgregado(producto, tallaSeleccionada);
+        }
+
+        // ---- Textos de políticas (edítalos aquí para cambiarlos en toda la página) ----
+        const POLITICAS = {
+            entrega: [
+                'Envío gratis al comprar 2 o más artículos. Si compras 1, el costo del envío se confirma por WhatsApp.',
+                'Cobertura: Soacha, Bogotá y Cundinamarca.',
+                'Después de recibir tu pedido te confirmamos por WhatsApp la fecha de entrega.',
+                'Tu pedido se confirma cuando recibimos el pago.'
+            ],
+            cambios: [
+                'Cambio por talla: escríbenos por WhatsApp dentro de los 5 días siguientes a recibir tu pedido.',
+                'La prenda debe estar sin uso, con sus etiquetas y en buen estado.',
+                'Si el cambio se debe a un error nuestro, el envío del cambio corre por nuestra cuenta.',
+                'No hay devoluciones de dinero, salvo que el producto llegue dañado o no corresponda a lo comprado.'
+            ],
+            cuidados: [
+                'Lava al revés, con agua fría y jabón suave.',
+                'No uses blanqueador.',
+                'Seca a la sombra y no la pongas en secadora.',
+                'No planches directamente sobre el estampado.'
+            ]
+        };
+        const TABS_POLITICA = [
+            { clave: 'entrega', etiqueta: 'Políticas de entrega' },
+            { clave: 'cambios', etiqueta: 'Políticas de cambios' },
+            { clave: 'info', etiqueta: 'Más información' },
+            { clave: 'cuidados', etiqueta: 'Cuidados del producto' }
+        ];
+        let tabPoliticaActual = 'entrega';
+        let modalAgregadoInstance = null;
+
+        function textosPolitica(clave) {
+            if (clave === 'info') {
+                return [
+                    'Formas de pago: ' + textoMediosPago(),
+                    'Envío: ' + ENVIO.texto + '.',
+                    HORARIO
+                ];
+            }
+            return POLITICAS[clave] || [];
+        }
+
+        function pintarTabsPolitica() {
+            document.getElementById('agregado-tabs').innerHTML = TABS_POLITICA.map(t => {
+                const activa = t.clave === tabPoliticaActual;
+                return `<button type="button" class="btn btn-sm rounded-pill px-3 ${activa ? 'text-white' : 'btn-outline-secondary'}" style="${activa ? 'background:#0f172a;' : ''}" onclick="cambiarTabPolitica('${t.clave}')">${t.etiqueta}</button>`;
+            }).join('');
+            document.getElementById('agregado-contenido').innerHTML =
+                '<ul class="mb-0 small">' + textosPolitica(tabPoliticaActual).map(x => `<li class="mb-2">${esc(x)}</li>`).join('') + '</ul>';
+        }
+
+        function cambiarTabPolitica(clave) {
+            tabPoliticaActual = clave;
+            pintarTabsPolitica();
+        }
+
+        function mostrarModalAgregado(producto, talla) {
+            document.getElementById('agregado-resumen').innerHTML =
+                `<img src="${esc(producto.imagen)}" alt="" style="width:72px;height:72px;object-fit:contain;background:#fff;border-radius:12px;">
+                 <div><div class="fw-bold">${esc(producto.nombre)}</div>
+                 <div class="small text-muted">Talla ${esc(talla)} · En tu carrito: ${cantidadEnCarrito(producto.id)}</div>
+                 <div class="fw-bold" style="color:#159947;">$ ${fmt(producto.precio)}</div></div>`;
+
+            pintarTabsPolitica();
+
+            const relacionados = productosGlobal
+                .map((p, i) => ({ p, i }))
+                .filter(x => x.p.id !== producto.id)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 4);
+            document.getElementById('agregado-relacionados').innerHTML = relacionados.map(x =>
+                `<div class="col-6 col-md-3"><div class="border rounded-3 p-2 h-100 text-center">
+                    <img src="${esc(x.p.imagen)}" alt="" style="height:90px;width:100%;object-fit:contain;">
+                    <div class="small fw-semibold mt-1">${esc(x.p.nombre)}</div>
+                    <div class="small text-muted mb-2">$ ${fmt(x.p.precio)}</div>
+                    <button type="button" class="btn btn-sm btn-outline-dark rounded-pill w-100" onclick="agregarRapido(${x.i})">Agregar</button>
+                 </div></div>`
+            ).join('');
+
+            if (!modalAgregadoInstance) modalAgregadoInstance = new bootstrap.Modal(document.getElementById('modalAgregado'));
+            modalAgregadoInstance.show();
+        }
+
+        // Agrega desde la ventana de "también te puede interesar" (usa la primera talla)
+        function agregarRapido(indice) {
+            const p = productosGlobal[indice];
+            if (!p) return;
+            const talla = p.tallas[0];
+            const existente = carrito.find(i => i.id === p.id && i.tallaSeleccionada === talla);
+            if (existente) existente.cantidad++;
+            else carrito.push({ id: p.id, nombre: p.nombre, equipo: p.equipo.etiqueta, precio: p.precio, tallaSeleccionada: talla, cantidad: 1 });
+            guardarCarrito();
+            actualizarCarritoUI();
+            mostrarModalAgregado(p, talla);
+        }
+
+        function verCarritoDesdeAgregado() {
+            const ventana = document.getElementById('modalAgregado');
+            ventana.addEventListener('hidden.bs.modal', function alOcultar() {
+                ventana.removeEventListener('hidden.bs.modal', alOcultar);
+                abrirModalCarrito();
+            });
+            modalAgregadoInstance.hide();
         }
 
         function cambiarCantidad(index, delta) {
