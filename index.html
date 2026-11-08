@@ -268,7 +268,9 @@
         const NUMERO_VENDEDOR = "573028345744";
         const IMG_FALLBACK = "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80";
 
-        const ENVIO = { valor: 0, texto: "Desde Ciudad Verde: aprox. $24.300 COP. Otras zonas se confirman por WhatsApp al hacer tu pedido" };
+        // Promoción: envío gratis al comprar esta cantidad de artículos o más
+        const PROMO_ENVIO_GRATIS_DESDE = 2;
+        const ENVIO = { valor: 0, texto: "Gratis al comprar 2 o más artículos. Si compras 1, el costo de envío se confirma por WhatsApp" };
         const MEDIOS_PAGO = ["Nequi Negocios (Llave: 0090078389)"];
         const HORARIO = "Atendemos por WhatsApp. Si escribes después de las 22:00, te respondemos al día siguiente.";
         const INSTAGRAM_URL = "";
@@ -680,7 +682,15 @@
                     `;
                 });
                 const subtotal = totalProductos();
-                html += `</tbody></table><div class="text-end fw-bold fs-4">Total: <span class="text-success">$ ${fmt(subtotal)} COP</span></div>`;
+                const unidades = carrito.reduce((s, i) => s + i.cantidad, 0);
+                const envioGratis = unidades >= PROMO_ENVIO_GRATIS_DESDE;
+                html += `</tbody></table>
+                    <div class="text-end">
+                        <div class="text-muted">Productos: $ ${fmt(subtotal)}</div>
+                        <div class="text-muted">Envío: ${envioGratis ? '<span class="text-success fw-bold">GRATIS 🎉</span>' : esc(ENVIO.texto)}</div>
+                        <div class="fw-bold fs-4 mt-2">Total: <span class="text-success">$ ${fmt(subtotal)} COP</span></div>
+                        ${envioGratis ? '' : '<small class="text-muted">Agrega 1 artículo más y el envío es gratis.</small>'}
+                    </div>`;
             }
             document.getElementById('lista-carrito').innerHTML = html;
         }
@@ -773,7 +783,9 @@
             carrito.forEach(i => {
                 mensaje += `- ${i.cantidad}x ${i.nombre} (${i.equipo}) [Talla: ${i.tallaSeleccionada}] - $${fmt(i.precio * i.cantidad)}\n`;
             });
-            mensaje += `\n💰 *Total:* $${fmt(subtotal)} COP\n\n_Pago realizado por Nequi Negocios (Llave: 0090078389). Quedo atento._`;
+            const unidadesMsg = carrito.reduce((s, i) => s + i.cantidad, 0);
+            mensaje += `\n🚚 *Envío:* ${unidadesMsg >= PROMO_ENVIO_GRATIS_DESDE ? 'GRATIS (promo 2 o más artículos)' : 'se confirma por WhatsApp'}\n`;
+            mensaje += `💰 *Total:* $${fmt(subtotal)} COP\n\n_Pago realizado por Nequi Negocios (Llave: 0090078389). Quedo atento._`;
 
             const urlWp = `https://api.whatsapp.com/send?phone=${NUMERO_VENDEDOR}&text=${encodeURIComponent(mensaje)}`;
             if (ventana) { ventana.location.href = urlWp; } else { window.location.href = urlWp; }
