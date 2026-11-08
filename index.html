@@ -92,6 +92,13 @@
         .nav-tienda a.nav-amarillo { background: #facc15; color: #0f172a; }
         .nav-tienda a.nav-amarillo:hover { background: #eab308; color: #0f172a; }
         @media (max-width: 576px) { .nav-tienda a { font-size: 0.75rem; padding: 0.4rem 0.6rem; } }
+        .carrusel-equipos { display: flex; flex-wrap: nowrap; gap: 0.5rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 3rem; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .carrusel-equipos::-webkit-scrollbar { display: none; }
+        .carrusel-equipos > * { flex-shrink: 0; }
+        .flecha-equipos { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #cbd5e1; background: #fff; color: #0f172a; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; }
+        .flecha-equipos:hover { background: #159947; color: #fff; border-color: #159947; }
+        .flecha-equipos.izq { left: 0; }
+        .flecha-equipos.der { right: 0; }
         .controles { max-width: 500px; margin: 0 auto; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -146,7 +153,11 @@
         </div>
 
         <!-- Pestañas de equipos -->
-        <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="contenedor-filtros"></div>
+        <div class="position-relative mb-5">
+            <button type="button" class="flecha-equipos izq" onclick="moverEquipos(-1)" aria-label="Ver equipos anteriores"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carrusel-equipos" id="contenedor-filtros"></div>
+            <button type="button" class="flecha-equipos der" onclick="moverEquipos(1)" aria-label="Ver más equipos"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
 
         <div id="loading" class="text-center py-5">
             <div class="spinner-border text-success" role="status"></div>
@@ -606,6 +617,11 @@
             categoriaActual = cat;
             construirFiltros();
             aplicarFiltrosYBusqueda();
+        }
+
+        // Mueve la fila de equipos a la izquierda (-1) o derecha (1)
+        function moverEquipos(direccion) {
+            document.getElementById('contenedor-filtros').scrollBy({ left: direccion * 240, behavior: 'smooth' });
         }
 
         // Usado por el menú superior: fija categoría y tipo, y lleva al catálogo
