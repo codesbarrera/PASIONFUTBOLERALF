@@ -180,21 +180,61 @@
         </div>
     </div>
 
-    <!-- Modal Carrito -->
+    <!-- Modal Carrito (pasos: carrito, entrega, pago) -->
+    <style>
+        .pasos-checkout { display:flex; justify-content:center; gap:28px; padding:14px 0; background:#fff; border-bottom:1px solid #e4e7ec; }
+        .paso-checkout { color:#98a2b3; font-weight:600; font-size:.9rem; }
+        .paso-checkout.activo { color:#0f172a; border-bottom:3px solid #159947; padding-bottom:4px; }
+        .paso-checkout.hecho { color:#159947; }
+    </style>
     <div class="modal fade" id="modalCarrito" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title"><i class="fa-solid fa-bag-shopping me-2"></i> Tu Carrito de Compras</h5>
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content border-0 shadow-lg overflow-hidden">
+                <div class="modal-header text-white" style="background:#0f172a;">
+                    <h5 class="modal-title"><i class="fa-solid fa-bag-shopping me-2"></i> Tu pedido</h5>
                     <button type="button" class="btn-close btn-close-white" onclick="cerrarModalCarrito()" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <div id="lista-carrito" class="table-responsive"></div>
-                    <div id="info-pago-carrito" class="small text-muted mt-2"></div>
-                    
-                    <hr class="my-4">
-
-                    <!-- SECCIÓN DE PAGO CON NEQUI NEGOCIOS (LLAVE) -->
+                <div class="pasos-checkout">
+                    <span class="paso-checkout activo" id="paso-ind-1">1. Carrito</span>
+                    <span class="paso-checkout" id="paso-ind-2">2. Entrega</span>
+                    <span class="paso-checkout" id="paso-ind-3">3. Pago</span>
+                </div>
+                <div class="modal-body p-0" style="background:#f8f9fa;">
+                    <div class="row g-0">
+                        <div class="col-lg-7 p-4">
+                            <div id="vista-1">
+                                <h6 class="fw-bold mb-3" style="color:#0f172a;">Tus artículos</h6>
+                                <div id="lista-carrito" class="table-responsive bg-white rounded-3 p-2"></div>
+                                <div id="info-pago-carrito" class="small text-muted mt-2"></div>
+                            </div>
+                            <div id="vista-2" class="d-none bg-white rounded-3 p-4">
+                                <form id="form-pedido" class="row g-3" onsubmit="return false;">
+                        <h6 class="fw-bold text-success mb-3"><i class="fa-solid fa-truck-fast me-2"></i> Datos de Envíos y Contacto</h6>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" id="cliente-nombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">WhatsApp de Contacto</label>
+                            <input type="tel" class="form-control" id="cliente-whatsapp" placeholder="Ej. 3028345744" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Correo Electrónico (para confirmación)</label>
+                            <input type="email" class="form-control" id="cliente-correo" placeholder="Ej. correo@ejemplo.com" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label small fw-bold">Dirección de Entrega</label>
+                            <input type="text" class="form-control" id="cliente-direccion" placeholder="Ej. Calle 10 # 20-30" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Ciudad / Localidad</label>
+                            <input type="text" class="form-control" id="cliente-ciudad" value="Soacha / Bogotá" required>
+                        </div>
+                    </form>
+                            </div>
+                            <div id="vista-3" class="d-none">
+                                <h6 class="fw-bold mb-3" style="color:#0f172a;">Pago</h6>
+                                <!-- SECCIÓN DE PAGO CON NEQUI NEGOCIOS (LLAVE) -->
                     <div class="card border-0 shadow-sm p-3 mb-4 rounded-4" style="background-color: #f3e8ff;">
                         <div class="text-center">
                             <span class="badge text-white mb-2 px-3 py-1 rounded-pill" style="background-color: #6b21a8;">Bre-B / Nequi Negocios</span>
@@ -219,34 +259,20 @@
                         </div>
                     </div>
 
-                    <form id="form-pedido" class="row g-3" onsubmit="return false;">
-                        <h6 class="fw-bold text-success mb-3"><i class="fa-solid fa-truck-fast me-2"></i> Datos de Envíos y Contacto</h6>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Nombre Completo</label>
-                            <input type="text" class="form-control" id="cliente-nombre" placeholder="Ej. Juan Pérez" required>
+                    
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">WhatsApp de Contacto</label>
-                            <input type="tel" class="form-control" id="cliente-whatsapp" placeholder="Ej. 3028345744" required>
+                        <div class="col-lg-5 p-4 bg-white border-start">
+                            <h6 class="fw-bold mb-3" style="color:#0f172a;">Resumen</h6>
+                            <div id="resumen"></div>
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label small fw-bold">Correo Electrónico (para confirmación)</label>
-                            <input type="email" class="form-control" id="cliente-correo" placeholder="Ej. correo@ejemplo.com" required>
-                        </div>
-                        <div class="col-md-8">
-                            <label class="form-label small fw-bold">Dirección de Entrega</label>
-                            <input type="text" class="form-control" id="cliente-direccion" placeholder="Ej. Calle 10 # 20-30" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label small fw-bold">Ciudad / Localidad</label>
-                            <input type="text" class="form-control" id="cliente-ciudad" value="Soacha / Bogotá" required>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="modal-footer bg-light px-4 py-3">
-                    <button type="button" class="btn btn-outline-secondary px-4 rounded-pill" onclick="cerrarModalCarrito()">Seguir Comprando</button>
-                    <button type="button" class="btn btn-success px-4 rounded-pill fw-bold" id="btn-enviar" onclick="enviarPedidoWhatsApp()">
-                        <i class="fa-brands fa-whatsapp me-2"></i> Enviar Pedido por WhatsApp
+                <div class="modal-footer bg-white px-4 py-3 justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4 d-none" id="btn-atras" onclick="irPaso(pasoActual - 1)">Atrás</button>
+                    <button type="button" class="btn rounded-pill px-4 fw-bold text-white ms-auto" style="background:#159947;" id="btn-siguiente" onclick="siguientePaso()">Continuar</button>
+                    <button type="button" class="btn rounded-pill px-4 fw-bold text-white ms-auto d-none" style="background:#159947;" id="btn-enviar" onclick="enviarPedidoWhatsApp()">
+                        <i class="fa-brands fa-whatsapp me-2"></i> Enviar pedido por WhatsApp
                     </button>
                 </div>
             </div>
@@ -693,6 +719,16 @@
                     </div>`;
             }
             document.getElementById('lista-carrito').innerHTML = html;
+
+            const unidadesR = carrito.reduce((sum, i) => sum + i.cantidad, 0);
+            const subR = totalProductos();
+            const gratisR = unidadesR >= PROMO_ENVIO_GRATIS_DESDE;
+            document.getElementById('resumen').innerHTML = `
+                <div class="d-flex justify-content-between"><span>Productos (${unidadesR})</span><span>$ ${fmt(subR)}</span></div>
+                <div class="d-flex justify-content-between mt-2"><span>Envío</span><span>${gratisR ? '<b class="text-success">GRATIS</b>' : '<small class="text-muted">Se confirma por WhatsApp</small>'}</span></div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold fs-5"><span>Total</span><span style="color:#159947;">$ ${fmt(subR)} COP</span></div>
+                ${gratisR ? '' : '<small class="text-muted d-block mt-2">Agrega 1 artículo más y el envío es gratis.</small>'}`;
         }
 
         function eliminarItem(index) {
@@ -701,7 +737,41 @@
             actualizarCarritoUI();
         }
 
-        function abrirModalCarrito() { modalInstance.show(); }
+        let pasoActual = 1;
+
+        function irPaso(n) {
+            pasoActual = Math.min(Math.max(n, 1), 3);
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('vista-' + i).classList.toggle('d-none', i !== pasoActual);
+                const ind = document.getElementById('paso-ind-' + i);
+                ind.classList.toggle('activo', i === pasoActual);
+                ind.classList.toggle('hecho', i < pasoActual);
+            }
+            document.getElementById('btn-atras').classList.toggle('d-none', pasoActual === 1);
+            document.getElementById('btn-siguiente').classList.toggle('d-none', pasoActual === 3);
+            document.getElementById('btn-enviar').classList.toggle('d-none', pasoActual !== 3);
+        }
+
+        function siguientePaso() {
+            if (pasoActual === 1) {
+                if (carrito.length === 0) { alert('Tu carrito está vacío.'); return; }
+                irPaso(2);
+                return;
+            }
+            if (pasoActual === 2) {
+                const campos = ['cliente-nombre', 'cliente-whatsapp', 'cliente-correo', 'cliente-direccion', 'cliente-ciudad'];
+                const faltan = campos.some(id => !document.getElementById(id).value.trim());
+                if (faltan) { alert('Completa tus datos de envío y contacto (incluido tu correo) para continuar.'); return; }
+                const correo = document.getElementById('cliente-correo').value.trim();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { alert('Revisa que tu correo esté bien escrito.'); return; }
+                irPaso(3);
+            }
+        }
+
+        function abrirModalCarrito() {
+            irPaso(carrito.length === 0 ? 1 : pasoActual);
+            modalInstance.show();
+        }
         function cerrarModalCarrito() { modalInstance.hide(); }
 
         function copiarLlaveNequi() {
