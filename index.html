@@ -82,12 +82,35 @@
         .btn-equipo .circulo-equipo { width: 64px; height: 64px; border-radius: 50%; background: #222; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .btn-equipo .circulo-equipo svg { width: 50px; height: 50px; }
         .btn-equipo.activo-equipo { box-shadow: 0 0 0 3px #0f172a; }
+        .nav-tienda { position: sticky; top: 0; z-index: 1030; background: #0f172a; border-bottom: 4px solid #159947; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+        .nav-tienda-inner { display: flex; gap: 0.25rem; overflow-x: auto; white-space: nowrap; padding: 0.6rem 0.75rem; justify-content: safe center; scrollbar-width: none; }
+        .nav-tienda-inner::-webkit-scrollbar { display: none; }
+        .nav-tienda a { color: #fff; font-weight: 800; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.03em; padding: 0.45rem 0.85rem; border-radius: 50rem; transition: background 0.2s, color 0.2s; }
+        .nav-tienda a:hover { background: #159947; color: #fff; }
+        .nav-tienda a.nav-naranja { background: #f97316; }
+        .nav-tienda a.nav-naranja:hover { background: #ea580c; }
+        .nav-tienda a.nav-amarillo { background: #facc15; color: #0f172a; }
+        .nav-tienda a.nav-amarillo:hover { background: #eab308; color: #0f172a; }
+        @media (max-width: 576px) { .nav-tienda a { font-size: 0.75rem; padding: 0.4rem 0.6rem; } }
         .controles { max-width: 500px; margin: 0 auto; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
+
+    <!-- Menú principal -->
+    <nav class="nav-tienda" aria-label="Menú principal">
+        <div class="nav-tienda-inner">
+            <a href="#catalogo" onclick="irACatalogo('todos', 'todos')">NOVEDADES</a>
+            <a href="#catalogo" onclick="irACatalogo('Camisetas', 'todos')">CAMISETAS</a>
+            <a href="#catalogo" onclick="irACatalogo('Busos', 'todos')">BUSOS</a>
+            <a href="#catalogo" class="nav-naranja" onclick="irACatalogo('todos', 'mas-vendidos')">🔥 MÁS VENDIDOS</a>
+            <a href="#contenedor-filtros">EQUIPOS</a>
+            <a href="#info-envios-pagos">ENVÍOS Y PAGOS</a>
+            <a href="#" class="nav-amarillo" onclick="event.preventDefault(); window.open(document.getElementById('btn-wa').href, '_blank');">CONTÁCTANOS</a>
+        </div>
+    </nav>
 
     <!-- Cabecera / Banner con la Imagen de Logo -->
     <div class="hero-section">
@@ -98,7 +121,7 @@
 
     <!-- Contenido Principal -->
     <div class="container my-5">
-        <h2 class="text-center fw-bold mb-4">🔥 Catálogo Interactivo</h2>
+        <h2 class="text-center fw-bold mb-4" id="catalogo">🔥 Catálogo Interactivo</h2>
 
         <!-- Buscador -->
         <div class="search-box mb-3">
@@ -560,6 +583,16 @@
             categoriaActual = cat;
             construirFiltros();
             aplicarFiltrosYBusqueda();
+        }
+
+        // Usado por el menú superior: fija categoría y tipo, y lleva al catálogo
+        function irACatalogo(tipo, cat) {
+            categoriaActual = cat || 'todos';
+            tipoActual = tipo || 'todos';
+            construirFiltros();
+            construirTipos();
+            aplicarFiltrosYBusqueda();
+            document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
         }
 
         function construirTipos() {
