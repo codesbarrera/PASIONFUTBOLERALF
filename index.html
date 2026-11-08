@@ -7,6 +7,17 @@
     <meta name="google-site-verification" content="2T6QfW7rfebdwu7hLj80UUCib_s5D6HuApVI69chHjA">
     <meta name="description" content="Venta de camisetas de fútbol, sudaderas y dotaciones deportivas de alta calidad con envíos seguros en Soacha, Bogotá y Cundinamarca. ¡Pide por WhatsApp!">
     <meta name="theme-color" content="#0f172a">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="camisetas de fútbol, camisetas Soacha, camisetas Bogotá, camiseta Millonarios, camiseta Atlético Nacional, camiseta América de Cali, camiseta Santa Fe, camiseta Junior, camiseta Selección Colombia, busos de fútbol, dotaciones deportivas, camisetas Premier League, camisetas La Liga">
+    <link rel="canonical" href="https://pasionfutbolerafl.vercel.app/">
+    <meta property="og:url" content="https://pasionfutbolerafl.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PasionFutbolerAlf | Camisetas de fútbol en Soacha y Bogotá">
+    <meta name="twitter:description" content="Camisetas, busos y dotaciones deportivas. Pide por WhatsApp con envíos en Soacha, Bogotá y Cundinamarca.">
+    <meta name="twitter:image" content="https://i.postimg.cc/Cx9Xn01L/Whats-App-Image-2026-10-30-at-10-43-16.jpg">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Store","name":"PasionFutbolerAlf","url":"https://pasionfutbolerafl.vercel.app/","image":"https://i.postimg.cc/Cx9Xn01L/Whats-App-Image-2026-10-30-at-10-43-16.jpg","description":"Camisetas de fútbol, busos y dotaciones deportivas en Soacha, Bogotá y Cundinamarca.","areaServed":[{"@type":"City","name":"Soacha"},{"@type":"City","name":"Bogotá"}],"paymentAccepted":"Nequi","currenciesAccepted":"COP"}
+    </script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚽%3C/text%3E%3C/svg%3E">
 
     <!-- Vista previa al compartir el enlace por WhatsApp / Facebook -->
@@ -126,8 +137,19 @@
         </div>
     </div>
 
+    <!-- Beneficios visibles (confianza) -->
+    <div class="bg-white border-bottom py-2 small fw-semibold text-center" style="color:#0f172a;">
+        <div class="container d-flex flex-wrap justify-content-center gap-3">
+            <span><i class="fa-solid fa-truck text-success me-1"></i> Envío gratis desde 2 artículos</span>
+            <span><i class="fa-solid fa-mobile-screen me-1" style="color:#6b21a8;"></i> Pagos con Nequi</span>
+            <span><i class="fa-solid fa-rotate text-success me-1"></i> Cambio por talla</span>
+            <span><i class="fa-brands fa-whatsapp text-success me-1"></i> Atención por WhatsApp</span>
+        </div>
+    </div>
+
     <!-- Contenido Principal -->
     <div class="container my-5">
+        <h1 class="visually-hidden">Camisetas de fútbol en Soacha y Bogotá | PasionFutbolerAlf</h1>
         <h2 class="text-center fw-bold mb-4" id="catalogo">🔥 Catálogo Interactivo</h2>
 
         <!-- Buscador -->
@@ -165,6 +187,12 @@
         </div>
 
         <div class="row" id="contenedor-productos"></div>
+
+        <!-- Texto para buscadores -->
+        <section class="mt-5 text-muted small" id="sobre-la-tienda">
+            <h2 class="h5 text-dark fw-bold">Camisetas de fútbol en Soacha y Bogotá</h2>
+            <p>PasionFutbolerAlf vende camisetas de fútbol colombianas e internacionales: Atlético Nacional, Millonarios, América de Cali, Santa Fe, Junior, la Selección Colombia y clubes de la Premier League, La Liga, la Serie A y la Bundesliga. También tenemos busos, sudaderas y dotaciones deportivas. Hacemos envíos en Soacha, Bogotá y Cundinamarca, recibimos pagos por Nequi y atendemos por WhatsApp.</p>
+        </section>
     </div>
 
     <!-- Envíos y pagos -->
@@ -696,7 +724,7 @@
                         <div class="col-12 col-sm-6 col-lg-4 mb-4">
                             <div class="card card-product h-100 rounded-4 overflow-hidden">
                                 <div class="img-overlay-container" onclick="verFoto(${index})" title="Ver foto">
-                                    <img src="${esc(prod.imagen)}" class="card-img-top product-img" alt="${esc(prod.nombre)}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK}'">
+                                    <img src="${esc(prod.imagen)}" class="card-img-top product-img" alt="Camiseta ${esc(prod.nombre)} ${esc(prod.equipo.etiqueta)} en Soacha y Bogotá" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK}'">
                                     <div class="img-hover-text"><span><i class="fa-solid fa-magnifying-glass-plus me-1"></i> Ver foto</span></div>
                                 </div>
                                 <div class="card-body d-flex flex-column p-4">
@@ -707,7 +735,7 @@
                                     </div>
                                     <h5 class="card-title fw-bold text-dark">${esc(prod.nombre)}</h5>
                                     <p class="text-success fw-bold fs-5 mb-1">$ ${fmt(prod.precio)} COP</p>
-                                    <div class="mb-2" style="min-height:1.2rem">${pocas ? `<small class="text-danger fw-bold">¡Quedan ${prod.stock}!</small>` : ''}</div>
+                                    <div class="mb-2" style="min-height:1.2rem">${prod.masVendido ? '<small class="text-warning fw-bold me-2">🔥 Más vendido</small>' : ''}${pocas ? `<small class="text-danger fw-bold">¡Quedan ${prod.stock}!</small>` : ''}</div>
                                     <div class="mb-3">
                                         <label class="form-label small fw-bold text-secondary">Selecciona Talla:</label>
                                         <select class="form-select form-select-sm rounded-pill py-2" id="talla-${index}">
