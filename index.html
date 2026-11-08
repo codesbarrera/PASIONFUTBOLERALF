@@ -78,6 +78,10 @@
         .search-box { max-width: 500px; margin: 0 auto; }
         .filter-btn { border-radius: 50rem; transition: all 0.2s ease; font-weight: 600; font-size: 0.9rem; }
         .filter-btn .conteo { font-size: 0.75rem; opacity: 0.8; }
+        .btn-equipo { padding: 0.3rem 0.7rem 0.3rem 0.3rem !important; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .btn-equipo .circulo-equipo { width: 40px; height: 40px; border-radius: 50%; background: #222; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .btn-equipo .circulo-equipo svg { width: 28px; height: 28px; }
+        .btn-equipo.activo-equipo { box-shadow: 0 0 0 3px #0f172a; }
         .controles { max-width: 500px; margin: 0 auto; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -305,10 +309,81 @@
 
         const CLAVE_CARRITO = 'pfa_carrito_v1';
         const EQUIPOS_CONOCIDOS = [
-            { clave: 'america',    etiqueta: 'América',    emoji: '🔴', color: 'danger'  },
-            { clave: 'nacional',   etiqueta: 'Nacional',   emoji: '🟢', color: 'success' },
-            { clave: 'millonarios',etiqueta: 'Millonarios', emoji: '🔵', color: 'primary' }
+            // ---- Liga Colombiana (el orden de esta lista es el orden de los filtros) ----
+            { clave: 'america',      etiqueta: 'América',                color: 'secondary', hex: '#d62828' },
+            { clave: 'nacional',     etiqueta: 'Nacional',               color: 'secondary', hex: '#1a9e3a' },
+            { clave: 'millonarios',  etiqueta: 'Millonarios',            color: 'secondary', hex: '#1f5fbf' },
+            { clave: 'santa fe',     etiqueta: 'Santa Fe',               color: 'secondary', hex: '#c1272d' },
+            { clave: 'junior',       etiqueta: 'Junior',                 color: 'secondary', hex: '#e03131' },
+            { clave: 'deportivo cali', etiqueta: 'Deportivo Cali',       color: 'secondary', hex: '#00843d' },
+            { clave: 'medellin',     etiqueta: 'Independiente Medellín', color: 'secondary', hex: '#9b1c1c' },
+            { clave: 'tolima',       etiqueta: 'Deportes Tolima',        color: 'secondary', hex: '#f2b705' },
+            { clave: 'bucaramanga',  etiqueta: 'Atlético Bucaramanga',   color: 'secondary', hex: '#f5c400' },
+            { clave: 'pasto',        etiqueta: 'Deportivo Pasto',        color: 'secondary', hex: '#2e8b57' },
+            { clave: 'envigado',     etiqueta: 'Envigado',               color: 'secondary', hex: '#2a8a3e' },
+            { clave: 'once caldas',  etiqueta: 'Once Caldas',            color: 'secondary', hex: '#1e4fa3' },
+            { clave: 'equidad',      etiqueta: 'La Equidad',             color: 'secondary', hex: '#1f4e79' },
+            { clave: 'cucuta',       etiqueta: 'Cúcuta Deportivo',       color: 'secondary', hex: '#b8202a' },
+            { clave: 'jaguares',     etiqueta: 'Jaguares',               color: 'secondary', hex: '#f1c40f' },
+            { clave: 'aguilas',      etiqueta: 'Águilas Doradas',        color: 'secondary', hex: '#f5b700' },
+            { clave: 'alianza',      etiqueta: 'Alianza Petrolera',      color: 'secondary', hex: '#0b5394' },
+            { clave: 'llaneros',     etiqueta: 'Llaneros',               color: 'secondary', hex: '#7b3f00' },
+            { clave: 'chico',        etiqueta: 'Boyacá Chicó',           color: 'secondary', hex: '#4b5563' },
+            { clave: 'patriotas',    etiqueta: 'Patriotas',              color: 'secondary', hex: '#1e3a8a' },
+            { clave: 'internacional', etiqueta: 'Internacional de Bogotá', color: 'secondary', hex: '#3b0764' },
+            { clave: 'real cartagena', etiqueta: 'Real Cartagena',       color: 'secondary', hex: '#0e6b3a' },
+            // ---- Selecciones ----
+            { clave: 'colombia',     etiqueta: 'Selección Colombia',     color: 'secondary', hex: '#fcd116' },
+            { clave: 'argentina',    etiqueta: 'Argentina',              color: 'secondary', hex: '#75aadb' },
+            { clave: 'brasil',       etiqueta: 'Brasil',                 color: 'secondary', hex: '#009c3b' },
+            { clave: 'espana',       etiqueta: 'España',                 color: 'secondary', hex: '#c60b1e' },
+            { clave: 'alemania',     etiqueta: 'Alemania',               color: 'secondary', hex: '#111111' },
+            { clave: 'francia',      etiqueta: 'Francia',                color: 'secondary', hex: '#0055a4' },
+            { clave: 'inglaterra',   etiqueta: 'Inglaterra',             color: 'secondary', hex: '#ffffff' },
+            { clave: 'portugal',     etiqueta: 'Portugal',               color: 'secondary', hex: '#006600' },
+            { clave: 'uruguay',      etiqueta: 'Uruguay',                color: 'secondary', hex: '#7fb3e0' },
+            { clave: 'mexico',       etiqueta: 'México',                 color: 'secondary', hex: '#006847' },
+            { clave: 'italia',       etiqueta: 'Italia',                 color: 'secondary', hex: '#0066cc' },
+            // ---- Premier League ----
+            { clave: 'arsenal',      etiqueta: 'Arsenal',                color: 'secondary', hex: '#ef0107' },
+            { clave: 'chelsea',      etiqueta: 'Chelsea',                color: 'secondary', hex: '#034694' },
+            { clave: 'liverpool',    etiqueta: 'Liverpool',              color: 'secondary', hex: '#c8102e' },
+            { clave: 'manchester city', etiqueta: 'Manchester City',     color: 'secondary', hex: '#6cabdd' },
+            { clave: 'manchester united', etiqueta: 'Manchester United',  color: 'secondary', hex: '#da291c' },
+            { clave: 'tottenham',    etiqueta: 'Tottenham',              color: 'secondary', hex: '#132257' },
+            // ---- La Liga ----
+            { clave: 'real madrid',  etiqueta: 'Real Madrid',            color: 'secondary', hex: '#ffffff' },
+            { clave: 'barcelona',    etiqueta: 'Barcelona',              color: 'secondary', hex: '#a50044' },
+            { clave: 'atletico madrid', etiqueta: 'Atlético de Madrid',  color: 'secondary', hex: '#cb3524' },
+            { clave: 'sevilla',      etiqueta: 'Sevilla',                color: 'secondary', hex: '#d00027' },
+            { clave: 'real sociedad', etiqueta: 'Real Sociedad',         color: 'secondary', hex: '#003da5' },
+            // ---- Serie A ----
+            { clave: 'juventus',     etiqueta: 'Juventus',               color: 'secondary', hex: '#111111' },
+            { clave: 'inter milan',  etiqueta: 'Inter de Milán',         color: 'secondary', hex: '#0a3d91' },
+            { clave: 'milan',        etiqueta: 'Milan',                  color: 'secondary', hex: '#c8102e' },
+            { clave: 'napoli',       etiqueta: 'Napoli',                 color: 'secondary', hex: '#12a0d7' },
+            { clave: 'roma',         etiqueta: 'Roma',                   color: 'secondary', hex: '#8e1f2f' },
+            // ---- Bundesliga ----
+            { clave: 'bayern',       etiqueta: 'Bayern Múnich',          color: 'secondary', hex: '#dc052d' },
+            { clave: 'borussia dortmund', etiqueta: 'Borussia Dortmund', color: 'secondary', hex: '#fde100' },
+            { clave: 'leverkusen',   etiqueta: 'Bayer Leverkusen',       color: 'secondary', hex: '#e32221' },
+            // ---- Ligue 1 ----
+            { clave: 'paris saint',  etiqueta: 'PSG',                    color: 'secondary', hex: '#004170' },
+            { clave: 'marse',        etiqueta: 'Marsella',               color: 'secondary', hex: '#2f9bd6' },
+            // ---- Brasil y Argentina (clubes) ----
+            { clave: 'flamengo',     etiqueta: 'Flamengo',               color: 'secondary', hex: '#c8102e' },
+            { clave: 'palmeiras',    etiqueta: 'Palmeiras',              color: 'secondary', hex: '#006437' },
+            { clave: 'corinthians',  etiqueta: 'Corinthians',            color: 'secondary', hex: '#111111' },
+            { clave: 'sao paulo',    etiqueta: 'São Paulo',              color: 'secondary', hex: '#d71920' },
+            { clave: 'boca juniors', etiqueta: 'Boca Juniors',           color: 'secondary', hex: '#0d3b8c' },
+            { clave: 'river plate',  etiqueta: 'River Plate',            color: 'secondary', hex: '#e5e5e5' }
         ];
+
+        // Camiseta en SVG con el color del equipo (se usa en lugar del nombre en los filtros)
+        function iconoCamiseta(hex) {
+            const c = hex || '#6c757d';
+            return `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="${c}" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" d="M17 6 L8 11 L3 20 L9 23 L12 19 L12 42 L36 42 L36 19 L39 23 L45 20 L40 11 L31 6 C29 10 19 10 17 6 Z"/><path fill="none" stroke="#fff" stroke-width="1.5" d="M17 6 C19 10 29 10 31 6"/></svg>`;
+        }
 
         let productosGlobal = [];
         let productosVisibles = [];
@@ -472,7 +547,8 @@
             let html = boton('todos', 'dark', `Todos <span class="conteo">(${productosGlobal.length})</span>`);
             html += boton('mas-vendidos', 'warning', `<i class="fa-solid fa-fire me-1"></i> Más Vendidos`);
             obtenerEquipos().forEach(e => {
-                html += boton(e.clave, e.color, `${e.emoji} ${esc(e.etiqueta)} <span class="conteo">(${e.total})</span>`);
+                const activo = categoriaActual === e.clave;
+                html += `<button class="btn btn-outline-${e.color} filter-btn btn-equipo${activo ? ' activo-equipo' : ''}" data-cat="${esc(e.clave)}" title="${esc(e.etiqueta)}" aria-label="${esc(e.etiqueta)}"><span class="circulo-equipo">${iconoCamiseta(e.hex)}</span><span class="conteo">(${e.total})</span></button>`;
             });
             cont.innerHTML = html;
             cont.querySelectorAll('.filter-btn').forEach(b => {
